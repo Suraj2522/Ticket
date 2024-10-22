@@ -1,0 +1,134 @@
+
+unminify
+
+Free tool to unminify (unpack, deobfuscate) JavaScript, CSS, HTML, XML and JSON code, making it readable and pretty.
+
+1
+
+{
+
+2
+
+    "version": 3,
+
+3
+
+    "sources": [
+
+4
+
+        "common/light/common.scss",
+
+5
+
+        "../../../node_modules/compass-mixins/lib/animation/_core.scss",
+
+6
+
+        "../../../node_modules/compass-mixins/lib/animation/animate/_attention-seekers.scss",
+
+7
+
+        "../../../node_modules/compass-mixins/lib/compass/css3/_shared.scss",
+
+8
+
+        "../../../node_modules/compass-mixins/lib/compass/css3/_transform.scss",
+
+9
+
+        "../../../node_modules/compass-mixins/lib/animation/animate/bouncing/_bouncing-exits.scss",
+
+10
+
+        "../../../node_modules/compass-mixins/lib/animation/animate/bouncing/_bouncing-entrances.scss",
+
+11
+
+        "../../../node_modules/compass-mixins/lib/animation/animate/fading/_fading-exits.scss",
+
+12
+
+        "../../../node_modules/compass-mixins/lib/animation/animate/fading/_fading-entrances.scss",
+
+13
+
+        "../../../node_modules/compass-mixins/lib/animation/animate/_flippers.scss",
+
+14
+
+        "../../../node_modules/compass-mixins/lib/compass/css3/_opacity.scss",
+
+15
+
+        "../../../node_modules/compass-mixins/lib/animation/animate/_lightspeed.scss",
+
+16
+
+        "../../../node_modules/compass-mixins/lib/animation/animate/rotating/_rotating-exits.scss",
+
+17
+
+        "../../../node_modules/compass-mixins/lib/animation/animate/rotating/_rotating-entrances.scss",
+
+18
+
+        "../../../node_modules/compass-mixins/lib/animation/animate/_specials.scss",
+
+19
+
+        "../../../node_modules/bootstrap/scss/mixins/_banner.scss",
+
+20
+
+        "../../../node_modules/bootstrap/scss/_root.scss",
+
+21
+
+        "../../../node_modules/bootstrap/scss/vendor/_rfs.scss",
+
+22
+
+        "../../../node_modules/bootstrap/scss/mixins/_color-mode.scss",
+
+23
+
+        "../../../node_modules/bootstrap/scss/_reboot.scss",
+
+24
+
+        "../../../node_modules/bootstrap/scss/_variables.scss",
+
+25
+
+        "../../../node_modules/bootstrap/scss/mixins/_border-radius.scss",
+
+Tab size
+
+If you’ve minified some code for your website or web app, you should have kept the original, unminified code for future reference. If you accidentally lost the originals or are reverse-engineering some code from another developer, you might need to unminify some already minified code. That’s where our totally free unminify tool comes in!
+What is minification?
+
+When a developer writes code, they will usually write for their own eyes to read it. They’ll make notes to themselves, split out the code onto multiple lines so it’s easier to read, and even write out explanations of what’s happening so they can reference it later.
+
+While this is very helpful for the coder — and any other developers that would wish to read it — it’s not helpful for web pages, slowing down loading times needlessly.
+
+Minification is the act of removing all these “useless” bits and parsing down the code to only what the computer needs to see. It can drastically reduce the sizes of code files, which simultaneously reduces load times.
+What does this unminify tool do (and not do)?
+
+This unminifying tool will take minified code and expand it so it is easier for humans to read. It can do this with files or with copied code snippets. It supports JavaScript (JS), CSS, HTML, XML, and JSON code.
+
+This unminification happens within your browser itself, so you don’t need to worry about a server going through your private or proprietary code. All your code and files stay local.
+
+However, this unminifying tool will only parse out the code based on the minified code. It will not restore a minified file to its original state. In other words, if the person who wrote the code added lots of notes and superfluous information in the original file, this will not restore those notes as they would have been discarded during the minification process. It will only take the code you give it and deobfuscate or unpack it.
+How to use this unminify tool?
+
+First, you’ll need some code. You can either copy and paste a code snippet, hit the BROWSE button to upload a code file, or just drag and drop a file onto the code field. You don’t need to signify the type of code you’re using — our tool will automatically detect the code format and react appropriately.
+
+Alternatively, you can hit the LOAD URL button to have our tool download the code from a particular page. Do note that the page in question will need to allow cross-origin requests for this to work.
+
+Once loaded, hit the UNMINIFY button and watch as your code instantly expands. If you like, you can change the TAB SIZE by adjusting the number to your preference. Hit the UNMINIFY button again to see the difference made when you change this number.
+
+With your code unminified, you can hit the DOWNLOAD button to get a new file filled with this unpacked code. You can also hit the COPY button to paste the deobfuscated code somewhere.
+
+If you want to unminify some new code, hit the CLEAR button and repeat these steps.
+The tool works locally in your browser, no data is uploaded to the server.

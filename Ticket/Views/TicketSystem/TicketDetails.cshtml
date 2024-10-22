@@ -1,0 +1,599 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <script src="~/PageScript/TicketDetails.js"></script>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>::Ticket::</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/assets1/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/assets1/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/assets1/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/assets1/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets1/vendors/mdi/css/materialdesignicons.min.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- <link rel="stylesheet" href="assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css"> -->
+    <link rel="stylesheet" href="~/assets1/vendors/datatables.net-bs5/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="~/assets1/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets1/js/select.dataTables.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/assets1/css/style.css">
+    <!-- endinject -->
+    <!--<link rel="shortcut icon" href="assets/images/favicon.png" />-->
+    <!----------chatbox css--------------->
+    <style>
+        .chat-container {
+            /*width: 400px;*/
+            padding: 16px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            /*height: calc(100vh - 32px);*/
+        }
+
+        .header {
+            background: #f5f8f5;
+            padding: 10px;
+        }
+
+        .body {
+            flex: 1;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+        }
+
+        .user-details {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+            .user-details span {
+                width: 60px;
+                min-width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                overflow: hidden;
+            }
+
+                .user-details span img {
+                    max-width: 100%;
+                    height: auto;
+                }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+            .user-info h5 {
+                margin: 0;
+                font-size: 18px;
+                font-weight: 500;
+            }
+
+            .user-info p {
+                margin: 0;
+                font-size: 16px;
+                font-weight: 400;
+            }
+
+        .chat-box {
+            position: relative;
+            margin: 10px 0;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #e0e0e0;
+            width: fit-content;
+            max-width: 80%;
+        }
+
+            .chat-box p {
+                margin: 0;
+                color: #f5f5f5;
+            }
+
+            .chat-box.sender {
+                background-color: #7DA0FA;
+                align-self: flex-end;
+            }
+
+            .chat-box.receiver {
+                background-color: #4747A1;
+                align-self: flex-start;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .chat-box.sender::before {
+                content: "";
+                position: absolute;
+                bottom: 1px;
+                right: -15px;
+                width: 15px;
+                height: 20px;
+                z-index: 9;
+                border-radius: 0 0 0 20px;
+                background: #fff;
+            }
+
+            .chat-box.sender::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                right: -9px;
+                width: 18px;
+                height: 15px;
+                background: #7DA0FA;
+            }
+
+            .chat-box.receiver::before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: -15px;
+                width: 15px;
+                height: 20px;
+                z-index: 9;
+                border-radius: 0 0 20px 0;
+                background: #fff;
+            }
+
+            .chat-box.receiver::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: -8px;
+                width: 15px;
+                height: 15px;
+                background: #4747A1;
+            }
+
+        .sender .status {
+            justify-content: flex-end;
+        }
+
+        .status {
+            display: flex;
+            font-size: 0.8em;
+            color: #ccc;
+            margin-top: 5px;
+        }
+
+        .input-container {
+            display: flex;
+        }
+
+            .input-container input {
+                flex: 1;
+                padding: 10px;
+                border: 1px solid #14274e0d;
+                border-radius: 5px 0 0 5px;
+                outline: none;
+            }
+
+            .input-container button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 0 5px 5px 0;
+                background-color: #14274e;
+                color: #ffffff;
+                cursor: pointer;
+                font-size: 1em;
+            }
+
+                .input-container button:hover {
+                    background-color: #394867;
+                }
+
+        .navbar {
+        }
+
+        .image-upload > input {
+            display: none;
+        }
+
+        .image-upload img {
+            width: 36px;
+            cursor: pointer;
+            padding: 4px 4px;
+            position: relative;
+            top: 10px;
+        }
+
+        .input-container {
+            justify-content: space-between;
+        }
+
+        .close {
+            float: right;
+            margin: 10px;
+        }
+    </style>
+    <!-------//---chatbox css--------------->
+</head>
+<body>
+    <div class="container-scroller" ng-app="MyApp" ng-controller="TicketDetailsController">
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+                <a class="navbar-brand brand-logo me-5">TICKET</a> @*<img src="~/assets1/images/logo.svg" class="me-2" alt="logo" />*@
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="~/assets1/images/logo-mini.svg" alt="logo" /></a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                @*<ul class="navbar-nav mr-lg-2">
+                        <li class="nav-item nav-search d-none d-lg-block">
+                            <div class="input-group">
+                                <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                                    <span class="input-group-text" id="search">
+                                        <i class="icon-search"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+                            </div>
+                        </li>
+                    </ul>*@
+                <ul class="navbar-nav navbar-nav-right">
+                    @*<li class="nav-item dropdown">
+                            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                                <i class="icon-bell mx-0"></i>
+                                <span class="count"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                                <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-info">
+                                            <i class="ti-receipt mx-0"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <h6 class="preview-subject font-weight-normal">New Ticket</h6>
+                                        <p class="font-weight-light small-text mb-0 text-muted"> Just now </p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-danger">
+                                            <i class="ti-info-alt mx-0"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <h6 class="preview-subject font-weight-normal">Pendind Ticket</h6>
+                                        <p class="font-weight-light small-text mb-0 text-muted"> 2 days ago </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>*@
+                    <li class="nav-item nav-profile dropdown">
+                        @*<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+                                <img src="~/assets1/images/faces/face28.jpg" alt="profile" />
+                            </a>*@
+                        <button type="button" class="btn btn-outline-danger btn-fw btn-sm" style="float:right;" ng-click="logout()"> Logout</button>
+                        @*<i class="ti-control-backward">
+                                        <
+                                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                                            <a class="dropdown-item">
+                                                <i class="ti-settings text-primary"></i> Settings
+                                            </a>
+                                            <a class="dropdown-item">
+                                                <i class="ti-power-off text-primary"></i> Logout
+                                            </a>
+                                        </div>
+                            </li>*@
+                </ul>
+            </div>
+        </nav>
+        @*<div class="container-fluid page-body-wrapper">*@
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <!------------------------table------------------->
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <div class="row ">
+                                    <div class="col-md-9 ">
+                                        <h4 class="card-title">List of Ticket</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="TicketList">
+                                            <button type="button" class="btn btn-outline-primary btn-fw btn-sm" style="float:right;"><i class="ti-control-backward"></i> Back</button>
+                                        </a>
+                                    </div>
+                                    <!-------ticket details----------->
+                                    <div class="col-md-6 mt-2">
+                                        <blockquote class="blockquote">
+                                            <h4 class="card-title">{{TicketDetails.TicketNumber}}</h4>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <ul>
+                                                        <li><b>Ticket Type :</b> <span>{{TicketDetails.QueryType}}</span></li>
+                                                        <li><b>Ticket For :</b> <span>{{TicketDetails.UserName}}</span></li>
+                                                        <li><b>Subject :</b> <span>{{TicketDetails.Subject}}</span></li>
+                                                        <li><b>Date :</b> <span>{{TicketDetails.Date}}</span></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <ul>
+                                                        <li><b>User Name : </b><span>{{TicketDetails.UserName}}</span></li>
+                                                        @*<li><b>Client Name : </b><span>XXXX</span></li>*@
+                                                        <li><b>Status :</b> <span>{{TicketDetails.Status}}</span></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group" ng-show="IscmbAssignToVisible">
+                                                        <label for=""><b>Assigned To : </b></label>
+                                                        <select id="ddlAssignedTo" ng-options="item.UserID as item.UserName for item in CallCenterEmployeeList" ng-model="AssignedTo"
+                                                                class="form-control" style="height: 30px; padding: 6px 12px; font-size: 13px; float: right;">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group" ng-show="IscmbTicketStatusVisible">
+                                                        <label for=""><b>Status : </b></label>
+                                                        <select class="form-select form-select-sm" id="" ng-model="TicketStatus" ng-options="option.value as option.label for option in optionsToShow">
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group mt-2" ng-show="IscmbTicketStatusVisible">
+                                                        <label for="remarks"><b>Remarks :</b></label><textarea id="remarks" ng-model="TicketRemarks" class="form-control" rows="3"></textarea>
+                                                    </div>
+                                                    <button type="button" class="btn btn-outline-primary btn-fw btn-sm mb-2" ng-click="AssignTicket()" ng-show="IsBtnSaveShow">Submit</button>
+
+                                                </div>
+
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <ul>
+                                                            <li><b style="color:red;">Issue : </b><span>{{TicketDetails.Description}}</span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </blockquote>
+                                    </div>
+                                    <!---------------->
+                                    <div class="col-md-6 mt-2">
+                                        <blockquote class="blockquote">
+                                            <!-----chatbox----->
+                                            <div class="chat-container">
+
+                                                <div class="header" style="display:block;">
+                                                    <div class="user-details" ng-show="TicketDetails.CurrentLoginTypeID == 1 || TicketDetails.CurrentLoginTypeID == 2">
+                                                        <span>
+                                                            <img src="https://images.pexels.com/photos/26183777/pexels-photo-26183777/free-photo-of-a-woman-sitting-in-the-driver-s-seat-of-a-car.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="" />
+                                                        </span>
+                                                        <div class="user-info">
+                                                            <h5>{{TicketDetails.UserName}}</h5>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="header">
+                                                    <div class="user-details" ng-if="TicketDetails.CurrentLoginTypeID == 3">
+                                                        <span>
+                                                            <img src="https://images.pexels.com/photos/26183777/pexels-photo-26183777/free-photo-of-a-woman-sitting-in-the-driver-s-seat-of-a-car.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="" />
+                                                        </span>
+                                                        <div class="user-info">
+                                                            <h5>Admin</h5>
+                                                            @*<p>it officer</p>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                                <div style="overflow-y:auto !important; height:300px !important;">
+                                                    <div class="body" ng-if="x.LoginTypeID == 3" ng-repeat="x in CallCenterMessagesList">
+
+                                                        <div class="chat-box sender" ng-if="x.IsCallCenterMSG == false">
+                                                            <div ng-if="x.AttachmentType == 'T'">
+                                                                <p>{{x.Message}}</p>
+                                                            </div>
+                                                            <div ng-if="x.AttachmentType == 'I'">
+                                                                <img src="{{x.Message}}" style="height:30px;width:30px;" ng-click="ShowFullSCrrenImg(x.Message)" />
+                                                            </div>
+                                                            <span class="status" ng-show="x.IsReadBySupportTeam==true">
+                                                                seen &nbsp;
+                                                                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M23.228 8.01785C23.6186 7.62741 23.6187 6.99424 23.2283 6.60363L22.5213 5.89638C22.1309 5.50577 21.4977 5.50563 21.1071 5.89607L10.0862 16.9122C9.69563 17.3027 9.6955 17.9359 10.0859 18.3265L10.7929 19.0337C11.1833 19.4243 11.8165 19.4245 12.2071 19.034L23.228 8.01785Z" fill="#008b02" />
+                                                                    <path d="M17.2285 8.01777C17.619 7.62724 17.619 6.99408 17.2285 6.60356L16.5214 5.89645C16.1309 5.50592 15.4977 5.50592 15.1072 5.89645L5.54542 15.4582L2.76773 12.6805C2.37721 12.29 1.74404 12.29 1.35352 12.6805L0.646409 13.3876C0.255884 13.7782 0.255885 14.4113 0.646409 14.8019L4.83831 18.9938C5.22883 19.3843 5.862 19.3843 6.25252 18.9938L17.2285 8.01777Z" fill="#008b02" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+
+                                                        <div class="chat-box receiver" ng-if="x.IsCallCenterMSG == true">
+                                                            <div ng-if="x.AttachmentType == 'T'">
+                                                                <p>{{x.Message}}</p>
+                                                            </div>
+                                                            <div ng-if="x.AttachmentType == 'I'">
+                                                                <img src="{{x.Message}}" style="height:30px;width:30px;" ng-click="ShowFullSCrrenImg(x.Message)" />
+                                                            </div>
+                                                            @*<p>{{x.Message}}</p>*@
+                                                            @*<img src="D:\netProjects\TicketSystemAttachments\2\2_2024-09-05_14_20_32_955.png" alt="Example Image" style="max-width: 100%; height: auto;">*@
+
+                                                            @*<span class="status">
+                                                                    <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M23.228 8.01785C23.6186 7.62741 23.6187 6.99424 23.2283 6.60363L22.5213 5.89638C22.1309 5.50577 21.4977 5.50563 21.1071 5.89607L10.0862 16.9122C9.69563 17.3027 9.6955 17.9359 10.0859 18.3265L10.7929 19.0337C11.1833 19.4243 11.8165 19.4245 12.2071 19.034L23.228 8.01785Z" fill="#008b02" />
+                                                                        <path d="M17.2285 8.01777C17.619 7.62724 17.619 6.99408 17.2285 6.60356L16.5214 5.89645C16.1309 5.50592 15.4977 5.50592 15.1072 5.89645L5.54542 15.4582L2.76773 12.6805C2.37721 12.29 1.74404 12.29 1.35352 12.6805L0.646409 13.3876C0.255884 13.7782 0.255885 14.4113 0.646409 14.8019L4.83831 18.9938C5.22883 19.3843 5.862 19.3843 6.25252 18.9938L17.2285 8.01777Z" fill="#008b02" />
+                                                                    </svg>
+                                                                    &nbsp; seen
+                                                                </span>*@
+                                                        </div>
+                                                    </div>
+                                                    @*-----------------------------------------------------------------------------------------------*@
+                                                    <div class="body" ng-if="x.LoginTypeID == 1 || x.LoginTypeID == 2" ng-repeat="x in CallCenterMessagesList">
+                                                        <div class="chat-box sender" ng-if="x.IsCallCenterMSG == true">
+                                                            <div ng-if="x.AttachmentType == 'T'">
+                                                                <p>{{x.Message}}</p>
+                                                            </div>
+                                                            <div ng-if="x.AttachmentType == 'I'">
+                                                                <img src="{{x.Message}}" style="height:30px;width:30px;" ng-click="ShowFullSCrrenImg(x.Message)" />
+                                                            </div>
+                                                            <span class="status" ng-show="x.IsReadByUser==true">
+                                                                seen &nbsp;
+                                                                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M23.228 8.01785C23.6186 7.62741 23.6187 6.99424 23.2283 6.60363L22.5213 5.89638C22.1309 5.50577 21.4977 5.50563 21.1071 5.89607L10.0862 16.9122C9.69563 17.3027 9.6955 17.9359 10.0859 18.3265L10.7929 19.0337C11.1833 19.4243 11.8165 19.4245 12.2071 19.034L23.228 8.01785Z" fill="#008b02" />
+                                                                    <path d="M17.2285 8.01777C17.619 7.62724 17.619 6.99408 17.2285 6.60356L16.5214 5.89645C16.1309 5.50592 15.4977 5.50592 15.1072 5.89645L5.54542 15.4582L2.76773 12.6805C2.37721 12.29 1.74404 12.29 1.35352 12.6805L0.646409 13.3876C0.255884 13.7782 0.255885 14.4113 0.646409 14.8019L4.83831 18.9938C5.22883 19.3843 5.862 19.3843 6.25252 18.9938L17.2285 8.01777Z" fill="#008b02" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+
+
+
+                                                        <div class="chat-box receiver" ng-if="x.IsCallCenterMSG == false">
+                                                            <div ng-if="x.AttachmentType == 'T'">
+                                                                <p>{{x.Message}}</p>
+                                                            </div>
+                                                            <div ng-if="x.AttachmentType == 'I'">
+                                                                <img src="{{x.Message}}" style="height:30px;width:30px;" ng-click="ShowFullSCrrenImg(x.Message)" />
+                                                            </div>
+                                                            @*<span class="status">
+                                                                    <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M23.228 8.01785C23.6186 7.62741 23.6187 6.99424 23.2283 6.60363L22.5213 5.89638C22.1309 5.50577 21.4977 5.50563 21.1071 5.89607L10.0862 16.9122C9.69563 17.3027 9.6955 17.9359 10.0859 18.3265L10.7929 19.0337C11.1833 19.4243 11.8165 19.4245 12.2071 19.034L23.228 8.01785Z" fill="#008b02" />
+                                                                        <path d="M17.2285 8.01777C17.619 7.62724 17.619 6.99408 17.2285 6.60356L16.5214 5.89645C16.1309 5.50592 15.4977 5.50592 15.1072 5.89645L5.54542 15.4582L2.76773 12.6805C2.37721 12.29 1.74404 12.29 1.35352 12.6805L0.646409 13.3876C0.255884 13.7782 0.255885 14.4113 0.646409 14.8019L4.83831 18.9938C5.22883 19.3843 5.862 19.3843 6.25252 18.9938L17.2285 8.01777Z" fill="#008b02" />
+                                                                    </svg>
+                                                                    &nbsp; seen
+                                                                </span>*@
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+
+
+                                                <div class="input-container">
+
+                                                    <input type="text" placeholder="Type a message..." ng-keyup="SendMessageskeyup($event)" ng-model="usernewchat" id="messageInput">
+                                                    @*<div class="image-upload">
+                                                            <label for="file-input">
+                                                                <img src="../assets1/images/file-icons/attachment.png" />
+                                                            </label>
+
+                                                            <input id="file-input" type="button" />
+                                                        </div>*@
+                                                    <div class="col-md-1">
+                                                        <div class="image-upload" data-bs-toggle="modal" data-bs-target="#ModelSendImg" ng-click="AddTicket()">
+                                                            <label for="file-input">
+                                                                <img src="../assets1/images/file-icons/attachment.png" />
+                                                            </label>
+
+                                                            <input id="file-input" type="button" />
+                                                        </div>
+                                                    </div>
+                                                    <button ng-click="SendMessages()">
+                                                        <svg fill="#fff" width="20px" height="20px" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M231.626,128a16.015,16.015,0,0,1-8.18262,13.96094L54.53027,236.55273a15.87654,15.87654,0,0,1-18.14648-1.74023,15.87132,15.87132,0,0,1-4.74024-17.60156L60.64746,136H136a8,8,0,0,0,0-16H60.64746L31.64355,38.78906A16.00042,16.00042,0,0,1,54.5293,19.44727l168.915,94.59179A16.01613,16.01613,0,0,1,231.626,128Z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!---///-chatbox------>
+                                        </blockquote>
+                                    </div>
+                                    <!-------//--ticket details-------->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--------------------//table--------------------->
+                @*<footer class="footer">
+                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024.  All rights reserved.</span>
+                        </div>
+                    </footer>*@
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        @*<div ng-show="isShowFullScreenImage" class="full-screen-modal" id="FullScrrenImg">
+                <img class="full_screen_img" ng-src="{{FullScreenImgPath}}" ng-click="closeFullScreenImage()" />
+            </div>*@
+        <div class="modal fade" id="FullScrrenImg" role="dialog" sstyle="color: #ffffff;background-color: #0af;border-color: #bce8f1;">
+            <div class="modal-dialog" style="z-index: 1234;">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form style="border-radius: 15px; padding: 10px; margin: 20px;  width: 90%; height: 90%; margin: auto; ">
+                            <button type="button" class="close" data-dismiss="modal" style="margin-right: -50px; margin-top: -45px; color:#000; opacity: 0.9;" ng-click="closeFullScreenImage()">
+                                &times;
+                            </button>
+                            <div class="text-center feedback ">
+
+                                <div class="form-check-inline">
+                                    <div class="form-group">
+                                        <img class="full_screen_img" style="max-width:100%" ng-src="{{FullScreenImgPath}}"  />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="ModelSendImg" role="dialog" sstyle="color: #ffffff;background-color: #0af;border-color: #bce8f1;">
+            <div class="modal-dialog" style="z-index: 1234;">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form style="border-radius: 15px; padding: 10px; margin: 20px;  width: 90%; height: 90%; margin: auto; ">
+                            <button type="button" class="close" style="margin-right: -58px; margin-top: -28px; color: #000; opacity: 0.9;" ng-click="hideModelSendImg()">
+                                &times;
+                            </button>
+                            <div class="text-center feedback ">
+
+                                <div class="form-check-inline">
+                                    <div class="form-group">
+                                        <img ng-src="{{imageUrl}}" style="max-width: 300px; max-height: 300px;" />
+                                        <hr style="color:black;">
+                                        <input type="file" id="TicketImageUpload" style="margin-bottom: -20px; " ng-model="selectedFile" accept="image/*" onchange="angular.element(this).scope().updateImage()" /><span>
+
+                                        </span>
+                                    </div>
+
+                                    <button type="button" ng-click="SendMessagesImg()" class="btn btn-primary btn-fw btn-sm">
+                                        Upload
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- page-body-wrapper ends -->
+        @*</div>*@
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="~/assets1/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script src="~/assets1/vendors/chart.js/chart.umd.js"></script>
+        <script src="~/assets1/vendors/datatables.net/jquery.dataTables.js"></script>
+        <!-- <script src="assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script> -->
+        <script src="~/assets1/vendors/datatables.net-bs5/dataTables.bootstrap5.js"></script>
+        <script src="~/assets1/js/dataTables.select.min.js"></script>
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="~/assets1/js/off-canvas.js"></script>
+        <script src="~/assets1/js/template.js"></script>
+        <script src="~/assets1/js/settings.js"></script>
+        <script src="~/assets1/js/todolist.js"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page-->
+        <script src="~/assets1/js/jquery.cookie.js" type="text/javascript"></script>
+        <script src="~/assets1/js/dashboard.js"></script>
+        <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
+        <!-- End custom js for this page-->
+</body>
+</html>
